@@ -6,7 +6,7 @@ namespace RefactoredControlFlow
 {
     public class NumberValidator
     {
-        private static readonly Func<int, bool> NoValidation = (number) => true;
+        private static readonly Func<int, bool> NoValidation = number => true;
 
         private Func<int, bool> _positive = NoValidation;
         private Func<int, bool> _negative = NoValidation;
@@ -30,7 +30,7 @@ namespace RefactoredControlFlow
 
         public NumberValidator ShouldBePositive()
         {
-            _positive = (number) => number > 0;
+            _positive = number => number > 0;
             _negative = NoValidation;
             return this;
         }
@@ -38,13 +38,13 @@ namespace RefactoredControlFlow
         public NumberValidator ShouldBeNegative()
         {
             _positive = NoValidation;
-            _negative = (number) => number < 0;
+            _negative = number => number < 0;
             return this;
         }
 
         public NumberValidator ShouldBeOdd()
         {
-            _odd = (number) => number % 2 == 1;
+            _odd = number => number % 2 == 1;
             _even = NoValidation;
             return this;
         }
@@ -52,13 +52,13 @@ namespace RefactoredControlFlow
         public NumberValidator ShouldBeEven()
         {
             _odd = NoValidation;
-            _even = (number) => number % 2 == 0;
+            _even = number => number % 2 == 0;
             return this;
         }
 
         public NumberValidator ShouldBeInRangeFromZero(int range)
         {
-            _rangeFromZero = (number) => Math.Abs(number) <= range;
+            _rangeFromZero = number => Math.Abs(number) <= range;
             return this;
         }
 
