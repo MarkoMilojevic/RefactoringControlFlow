@@ -1,15 +1,15 @@
 ﻿using System;
 
-namespace ControlFlowWithBranching
+namespace RefactoredControlFlow
 {
     public class Program
     {
         public static void Main(string[] args)
         {
             var validator = new NumberValidator()
-                                .ShouldBePositive()
-                                .ShouldBeEven()
-                                .ShouldBeInRangeFromZero(100);
+                .ShouldBePositive()
+                .ShouldBeEven()
+                .ShouldBeInRangeFromZero(100);
 
             Console.WriteLine("Positive, even, -100 <= x <= 100");
             Console.WriteLine($"50: {validator.Validate(50)}");
@@ -17,9 +17,9 @@ namespace ControlFlowWithBranching
             Console.WriteLine($"151: {validator.Validate(51)}");
 
             validator = new NumberValidator()
-                            .ShouldBeNegative()
-                            .ShouldBeOdd()
-                            .ShouldBeInRangeFromZero(10);
+                .ShouldBeNegative()
+                .ShouldBeOdd()
+                .ShouldBeInRangeFromZero(10);
 
             Console.WriteLine();
 
@@ -31,6 +31,20 @@ namespace ControlFlowWithBranching
             Console.WriteLine();
 
             new Workflow()
+                .Ready().Execute()
+                .Active().Execute()
+                .Complete().Execute();
+
+            Console.WriteLine();
+
+            new Workflow(Workflows.Accounting)
+                .Ready().Execute()
+                .Active().Execute()
+                .Complete().Execute();
+
+            Console.WriteLine();
+
+            new Workflow(Workflows.HR)
                 .Ready().Execute()
                 .Active().Execute()
                 .Complete().Execute();
